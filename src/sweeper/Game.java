@@ -6,7 +6,7 @@ public class Game {
 
     private GameState state;
 
-    public Game(byte cols, byte rows, short bombs) {
+    public Game(final byte cols, final byte rows, final short bombs) {
         Ranges.setSize(new Coord(cols, rows));
 //        if (bombs > (cols * rows)) bombs = (short) (cols * rows / 2);
         bomb = new Bomb(bombs);
@@ -19,23 +19,23 @@ public class Game {
         state = GameState.PLAYED;
     }
 
-    public void pressLeftButton(Coord coord) {
+    public void pressLeftButton(final Coord coord) {
         if (isGameOver()) return;
 
         openBox(coord);
         checkWinner();
     }
 
-    public void pressRightButton(Coord coord) {
+    public void pressRightButton(final Coord coord) {
         if (isGameOver()) return;
 
-        flag.toggleFlagedToBox(coord);
+        flag.toggleFlaggedToBox(coord);
     }
 
 
-    public Box getBox(Coord coord) {
+    public Box getBox(final Coord coord) {
         if (Box.OPENED == flag.get(coord))
-            return bomb.get (coord);
+            return bomb.get(coord);
         else
             return flag.get(coord);
     }
@@ -49,7 +49,7 @@ public class Game {
     }
 
     public short getTotalFlagged() {
-        return flag.getTotalFlaged();
+        return flag.getTotalFlagged();
     }
 
     private boolean isGameOver() {
@@ -68,7 +68,7 @@ public class Game {
             }
     }
 
-    private void openBox(Coord coord) {
+    private void openBox(final Coord coord) {
         switch (flag.get(coord)) {
             case OPENED : setOpenedToClosedBoxesAroundNumber (coord); break;
             case FLAGED : break;
@@ -82,7 +82,7 @@ public class Game {
         }
     }
 
-    void setOpenedToClosedBoxesAroundNumber(Coord coord) {
+    void setOpenedToClosedBoxesAroundNumber(final Coord coord) {
         if (Box.BOMB != bomb.get(coord))
             if (bomb.get(coord).getNumber () == flag.getCountOfFlagedBoxesAround (coord))
                 for (Coord around : Ranges.getCoordsAround(coord))
@@ -90,7 +90,7 @@ public class Game {
                         openBox(around);
     }
 
-    private void openBombs(Coord bombedCoord) {
+    private void openBombs(final Coord bombedCoord) {
         flag.setBombedToBox(bombedCoord);
         for (Coord coord: Ranges.getAllCoords())
             if (bomb.get(coord) == Box.BOMB)
@@ -100,7 +100,7 @@ public class Game {
         state = GameState.BOMBED;
     }
 
-    private void openBoxesAroundZero (Coord coord) {
+    private void openBoxesAroundZero (final Coord coord) {
         flag.setOpenedToBox(coord);
         for (Coord around : Ranges.getCoordsAround(coord))
             openBox (around);

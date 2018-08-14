@@ -4,7 +4,7 @@ class Bomb {
     private Matrix bombMap;
     private short totalBombs;
 
-    Bomb(short totalBombs) {
+    Bomb(final short totalBombs) {
         this.totalBombs = totalBombs;
         fixBombsCount();
     }
@@ -17,7 +17,7 @@ class Bomb {
 
     }
 
-    Box get (Coord coord) {
+    Box get (final Coord coord) {
         return bombMap.get(coord);
     }
 
@@ -42,7 +42,7 @@ class Bomb {
         }
     }
 
-    private void incNumbersAroundBomb(Coord coord) {
+    private void incNumbersAroundBomb(final Coord coord) {
         for (Coord around : Ranges.getCoordsAround(coord))
             if (Box.BOMB != bombMap.get(around))
                 bombMap.set(around, bombMap.get(around).nextNumberBox());

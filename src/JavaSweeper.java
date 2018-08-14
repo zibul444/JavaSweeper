@@ -9,9 +9,9 @@ import sweeper.Box;
 public class JavaSweeper extends JFrame {
     private Game game;
 
-    private final byte COLS = 32;
-    private final byte ROWS = 32;
-    private final byte BOMBS = 127;
+    private final byte COLS = 8;
+    private final byte ROWS = 8;
+    private final byte BOMBS = 3;
     private final byte IMAGE_SIZE = 50;
 
     private JPanel panel;
@@ -90,7 +90,7 @@ public class JavaSweeper extends JFrame {
 
     }
 
-    private Image getImage (String name) {
+    private Image getImage (final String name) {
         String fileName = "img/" + name + ".png";
         ImageIcon icon = new ImageIcon(getClass().getResource(fileName));
         return icon.getImage();

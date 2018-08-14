@@ -3,72 +3,72 @@ package sweeper;
 class Flag {
     private Matrix flagMap;     // Верхний слой
 
-    private byte totalFlaged; // Установленных флагов
+    private byte totalFlagged; // Установленных флагов
     private short totalClosed; // Сколько закрытых клеток
 
     void start () {
         flagMap = new Matrix(Box.CLOSED);
-        totalFlaged = -1;
+        totalFlagged = -1;
         totalClosed = Ranges.getSquare(); // Площадь поля
     }
 
-    Box get (Coord coord) {
+    Box get (final Coord coord) {
         return flagMap.get(coord);
     }
 
-    byte getTotalFlaged() {
-        return totalFlaged;
+    byte getTotalFlagged() {
+        return totalFlagged;
     }
 
     short getTotalClosed() {
         return totalClosed;
     }
 
-    void setOpenedToBox (Coord coord) {
+    void setOpenedToBox (final Coord coord) {
         flagMap.set (coord, Box.OPENED);
         totalClosed --;
     }
 
-    private void setFlagedToBox (Coord coord) {
+    private void setFlaggedToBox(final Coord coord) {
         flagMap.set (coord, Box.FLAGED);
-        if (totalFlaged >= 0)
-            totalFlaged++;
-        else totalFlaged = 1;
+        if (totalFlagged >= 0)
+            totalFlagged++;
+        else totalFlagged = 1;
     }
 
-    private void setClosedToBox (Coord coord) {
+    private void setClosedToBox (final Coord coord) {
         flagMap.set (coord, Box.CLOSED);
-        totalFlaged--;
+        totalFlagged--;
     }
 
-    void toggleFlagedToBox(Coord coord) {
+    void toggleFlaggedToBox(final Coord coord) {
         switch (flagMap.get(coord)) {
             case FLAGED : setClosedToBox(coord); break;
-            case CLOSED : setFlagedToBox(coord); break;
+            case CLOSED : setFlaggedToBox(coord); break;
         }
     }
 
     public void setFlagedToLastClosedBoxes() {
         for (Coord coord : Ranges.getAllCoords())
             if (Box.CLOSED == flagMap.get(coord))
-                setFlagedToBox(coord);
+                setFlaggedToBox(coord);
     }
 
-    public void setBombedToBox(Coord coord) {
+    public void setBombedToBox(final Coord coord) {
         flagMap.set(coord, Box.BOMBED);
     }
 
-    void setOpenedToClosedBox(Coord coord) {
+    void setOpenedToClosedBox(final Coord coord) {
         if (Box.CLOSED == flagMap.get(coord))
             flagMap.set(coord, Box.OPENED);
     }
 
-    void setNobombToFlagedBox(Coord coord) {
+    void setNobombToFlagedBox(final Coord coord) {
         if (Box.FLAGED == flagMap.get(coord))
             flagMap.set (coord, Box.NOBOMB);
     }
 
-    short getCountOfFlagedBoxesAround(Coord coord) {
+    short getCountOfFlagedBoxesAround(final Coord coord) {
         short count = 0;
         for (Coord around : Ranges.getCoordsAround(coord))
             if (flagMap.get(around) == Box.FLAGED)

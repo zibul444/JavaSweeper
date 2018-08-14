@@ -4,13 +4,13 @@ public class Coord {
     private byte x;
     private byte y;
 
-    public Coord(byte x, byte y) {
+    public Coord(final byte x, final byte y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (!(o instanceof Coord))
             return super.equals(o);
         Coord to = (Coord) o;

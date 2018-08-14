@@ -8,7 +8,7 @@ public class Ranges {
     static private ArrayList<Coord> allCoords;
     static private Random random = new Random();
 
-    static void setSize (Coord size) {
+    static void setSize (final Coord size) {
         Ranges.size = size;
         allCoords = new ArrayList<>();
         for (byte x = 0; x < size.getX(); x++) {
@@ -26,7 +26,7 @@ public class Ranges {
         return allCoords;
     }
 
-    static boolean inRange (Coord coord) {
+    static boolean inRange (final Coord coord) {
         return  coord.getX() >= 0 && coord.getX() < size.getX() &&
                 coord.getY() >= 0 && coord.getY() < size.getY();
     }
@@ -35,7 +35,7 @@ public class Ranges {
         return new Coord((byte) random.nextInt(size.getX()), (byte) random.nextInt(size.getY()));
     }
 
-    static  ArrayList<Coord> getCoordsAround(Coord coord) {
+    static  ArrayList<Coord> getCoordsAround(final Coord coord) {
         Coord around;
         ArrayList<Coord> list = new ArrayList<>();
         for (byte x = (byte) (coord.getX() - 1); x <= coord.getX() + 1; x++)

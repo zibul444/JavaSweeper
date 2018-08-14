@@ -18,7 +18,7 @@ public enum Box {
     BOMBED,
     NOBOMB;
 
-    public Object image;
+    public Object image; // // FIXME: Add interface
 
     Box nextNumberBox () {
         return Box.values() [this.ordinal() + 1];
